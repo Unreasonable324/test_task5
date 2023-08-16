@@ -1,4 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import clickOutside from 'v3-click-outside'
 
-createApp(App).mount('#app')
+
+const app = createApp(App)
+
+
+app.use(clickOutside)
+app.mount('#app')

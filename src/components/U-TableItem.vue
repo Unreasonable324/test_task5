@@ -6,6 +6,7 @@
           <img
             :src="require('../assets/images/phonesImg/' + phone_data.image)"
             alt="phoneImg"
+            class="main_photo"
           />
           <img
             src="../assets/images/chevron_small.png"
@@ -23,7 +24,7 @@
             v-if="isShowSearchPhoneModal"
             :remainsPhones_data="remainsPhones_data"
             @replacementPhone="replacementPhone"
-            @CloseModal="()=>{isShowSearchPhoneModal = false}"
+            @CloseModal="CloseModal"
           ></U-ModalWindow>
         </div>
         <div class="table_titles__preview__phone-name">{{ phone_data.name }}</div>
@@ -119,15 +120,23 @@ export default defineComponent({
     replacementPhone(itemArticle: article) {
       this.$emit("replacementPhone", itemArticle, this.ThisArticle);
     },
+    CloseModal(){
+      this.isShowSearchPhoneModal = false
+    }
   },
 });
 </script>
 
 <style>
+
 .table_titles__preview__phone-img {
+  height: 100%;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+}
+.main_photo{
+  height: 100%;
 }
 .select-png {
   transition: all 0.3s ease;

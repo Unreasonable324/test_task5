@@ -53,7 +53,7 @@ export default defineComponent({
     return {
       remainsPhones: [] as Phone[],
       clonePhones: [] as Phone[],
-      visiblePhone: 2 as number,
+      visiblePhone: 3 as number,
       variantsSlicePhones: [2, 3, 4, 5, 6] as number[],
       phones: phonesApi as Phone[],
       isChecked: false as boolean,
