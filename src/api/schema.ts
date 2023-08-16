@@ -1,16 +1,17 @@
-export interface Phones {
-    article: number;
-    image: string;
-    name: string;
-    manufacturer: string;
-    releaseYear: string;
-    diagonal: string;
-    countryOfOrigin: string;
-    memoryCapacity: string;
-    screenRefreshRate: string;
-    nfc: boolean;
-    eSIMSupport: boolean;
-    supportWirelessCharging: boolean;
-    price: number;
+export type article = number | "duplicate"
+
+export interface Phone {
+    article: article;
+    image: string | "duplicate";
+    name: string | "duplicate";
+    manufacturer: string | "duplicate";
+    releaseYear: string | "duplicate";
+    diagonal: string | "duplicate";
+    countryOfOrigin: string | "duplicate";
+    memoryCapacity: string | "duplicate";
+    screenRefreshRate: string | "duplicate";
+    nfc: boolean | "duplicate";
+    eSIMSupport: boolean | "duplicate";
+    supportWirelessCharging: boolean | "duplicate";
+    price: number | "duplicate";
 }
-export type RemainsPhones = Phones | undefined

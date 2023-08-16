@@ -6,25 +6,67 @@
           <div class="table_titles__preview">
             <slot></slot>
           </div>
-          <div class="table_titles__manufacturer">производитель</div>
-
-          <div class="table_titles__release-year">год релиза</div>
-
-          <div class="table_titles__diagonal">Диагональ экрана (дюйм)</div>
-          <div class="table_titles__country-of-origin">Страна-производитель</div>
-          <div class="table_titles__memory-capacity">Объем памяти</div>
-          <div class="table_titles__screen-refresh-rate">Частота обновления экрана</div>
-          <div class="table_titles__nfc">nfc</div>
-          <div class="table_titles__eSIM-support">Поддержка eSIM</div>
-          <div class="table_titles__support-wireless-charging">
+          <div
+            class="table_titles__manufacturer"
+            v-if="isVivsibleTitles(phones_data, 'manufacturer')"
+          >
+            производитель
+          </div>
+          <div
+            class="table_titles__release-year"
+            v-if="isVivsibleTitles(phones_data, 'releaseYear')"
+          >
+            год релиза
+          </div>
+          <div
+            class="table_titles__diagonal"
+            v-if="isVivsibleTitles(phones_data, 'diagonal')"
+          >
+            Диагональ экрана (дюйм)
+          </div>
+          <div
+            class="table_titles__country-of-origin"
+            v-if="isVivsibleTitles(phones_data, 'countryOfOrigin')"
+          >
+            Страна-производитель
+          </div>
+          <div
+            class="table_titles__memory-capacity"
+            v-if="isVivsibleTitles(phones_data, 'memoryCapacity')"
+          >
+            Объем памяти
+          </div>
+          <div
+            class="table_titles__screen-refresh-rate"
+            v-if="isVivsibleTitles(phones_data, 'screenRefreshRate')"
+          >
+            Частота обновления экрана
+          </div>
+          <div class="table_titles__nfc" v-if="isVivsibleTitles(phones_data, 'nfc')">
+            nfc
+          </div>
+          <div
+            class="table_titles__eSIM-support"
+            v-if="isVivsibleTitles(phones_data, 'eSIMSupport')"
+          >
+            Поддержка eSIM
+          </div>
+          <div
+            class="table_titles__support-wireless-charging"
+            v-if="isVivsibleTitles(phones_data, 'supportWirelessCharging')"
+          >
             Поддержка беспроводной зарядки
           </div>
-          <div class="table_titles__price">стоимость</div>
+          <div class="table_titles__price" v-if="isVivsibleTitles(phones_data, 'price')">
+            стоимость
+          </div>
         </div>
         <UTableItem
           v-for="phone_data in phones_data"
           :phone_data="phone_data"
           :key="phone_data.article"
+          :remainsPhones_data="remainsPhones_data"
+          @replacementPhone="replacementPhone"
         ></UTableItem>
       </div>
     </div>
@@ -34,7 +76,7 @@
 <script lang="ts">
 import UTableItem from "./U-TableItem.vue";
 import { PropType, defineComponent } from "vue";
-import { Phones,RemainsPhones } from "../api/schema";
+import { Phone, article } from "../api/schema";
 
 export default defineComponent({
   name: "U-Table",
@@ -43,15 +85,34 @@ export default defineComponent({
   },
   props: {
     phones_data: {
-      type: Array as PropType<RemainsPhones[]>,
+      type: Array as PropType<Phone[]>,
+      default() {
+        return [];
+      },
+    },
+    remainsPhones_data: {
+      type: Array as PropType<Phone[]>,
+      default() {
+        return [];
+      },
     },
   },
   data() {
     return {};
   },
-  // mounted() {},
-  // beforeDestroy() {},
-  methods: {},
+  methods: {
+    isVivsibleTitles(phones_data: Phone[], key: string): boolean {
+      for (let phone_data of phones_data) {
+        if (phone_data[key as keyof Phone] === "duplicate") {
+          return false;
+        }
+      }
+      return true;
+    },
+    replacementPhone(itemArticle: article, ThisArticle: article) {
+      this.$emit("replacementPhone", itemArticle, ThisArticle);
+    },
+  },
 });
 </script>
 
