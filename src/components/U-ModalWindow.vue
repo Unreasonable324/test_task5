@@ -1,39 +1,34 @@
 <template>
-  <div class="bg" @click.self="CloseModal">
-    <div class="U-modal-window">
-      <div class="modal-wrapper">
-        <div class="wrapper-slot">
-          <input
-            type="text"
-            placeholder="Поиск"
-            v-model="inputStr"
-            v-if="remainsPhones_data.length > 3"
-          />
-          <p
-            v-if="!filteredMovies(inputStr, remainsPhones_data).length"
-            class="searchNone"
-          >
-            Товар <span>{{ inputStr }}</span> не найден
-          </p>
-          <div
-            class="wrapper-remains-phones"
-            v-for="(item, index) of filteredMovies(inputStr, remainsPhones_data)"
-            :key="index"
-          >
-            <div class="wrapper-remains-phones__item">
+  <div class="U-modal-window" v-click-outside="CloseModal">
+    <div class="modal-wrapper">
+      <div class="wrapper-slot">
+        <input
+          type="text"
+          placeholder="Поиск"
+          v-model="inputStr"
+          v-if="remainsPhones_data.length > 3"
+        />
+        <p v-if="!filteredMovies(inputStr, remainsPhones_data).length" class="searchNone">
+          Товар <span>{{ inputStr }}</span> не найден
+        </p>
+        <div
+          class="wrapper-remains-phones"
+          v-for="(item, index) of filteredMovies(inputStr, remainsPhones_data)"
+          :key="index"
+        >
+          <div class="wrapper-remains-phones__item">
+            <img
+              src="../assets/images/Vector.png"
+              alt=""
+              @click="replacementPhone(item.article)"
+            />
+            <div class="wrapper-remains-phones__item-image">
               <img
-                src="../assets/images/Vector.png"
-                alt=""
-                @click="replacementPhone(item.article)"
+                :src="require('../assets/images/phonesImg/' + item.image)"
+                alt="phoneImg"
               />
-              <div class="wrapper-remains-phones__item-image">
-                <img
-                  :src="require('../assets/images/phonesImg/' + item.image)"
-                  alt="phoneImg"
-                />
-              </div>
-              {{ item.name }}
             </div>
+            {{ item.name }}
           </div>
         </div>
       </div>
@@ -44,7 +39,6 @@
 <script lang="ts">
 import { PropType, defineComponent } from "vue";
 import { Phone, article } from "../api/schema";
-
 export default defineComponent({
   name: "U-ModalWindow",
   components: {},
@@ -62,6 +56,7 @@ export default defineComponent({
     };
   },
   computed: {},
+
   methods: {
     replacementPhone(itemArticle: article) {
       this.$emit("replacementPhone", itemArticle);
@@ -74,8 +69,8 @@ export default defineComponent({
       }
       return remainsPhones_data;
     },
-    CloseModal() {
-      this.$emit("CloseModal");
+    CloseModal(isOutside: boolean): void {
+      if (isOutside) this.$emit("CloseModal");
     },
   },
 });
@@ -92,16 +87,7 @@ export default defineComponent({
   overflow: hidden;
   z-index: 3;
 }
-.bg::before {
-  content: "";
-  position: fixed;
-  background: #ff000026;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  top: 0;
-  left: 0;
-}
+
 .modal-wrapper {
   overflow: auto;
   width: 350px;

@@ -3,8 +3,18 @@
     <div class="U-table">
       <div class="table-wrapper">
         <div class="table_titles">
-          <div class="table_titles__preview">
+          <!-- <div class="table_titles__preview">
             <slot></slot>
+          </div> -->
+          <div class="table_titles__preview">
+            <div class="table_titles__preview-data">
+              <div class="table_titles__preview__phone-img">
+                
+                
+               
+              </div>
+              <div class="table_titles__preview__phone-name"><slot></slot></div>
+            </div>
           </div>
           <div
             class="table_titles__manufacturer"
@@ -150,7 +160,7 @@ export default defineComponent({
 }
 .table_titles > div:nth-child(1) {
   display: flex;
-  align-items: flex-end;
+  align-items: stretch;
   height: 195px;
   padding-bottom: 50px;
   margin-top: 20px;
@@ -167,12 +177,13 @@ export default defineComponent({
 .table_titles:nth-child(1) > div:nth-child(1) {
   display: flex;
   justify-content: flex-start;
-
+  align-items: stretch;
   text-transform: none;
   font-weight: 400;
   font-size: 16px;
   color: #0d5adc;
 }
+
 .table_titles > div:nth-child(n + 2) {
   display: flex;
   align-items: center;
