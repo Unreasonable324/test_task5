@@ -3,9 +3,7 @@
     <div class="U-table">
       <div class="table-wrapper">
         <div class="table_titles">
-          <!-- <div class="table_titles__preview">
-            <slot></slot>
-          </div> -->
+          
           <div class="table_titles__preview">
             <div class="table_titles__preview-data">
               <div class="table_titles__preview__phone-img">

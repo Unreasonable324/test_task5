@@ -17,13 +17,6 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "U-header",
-  // components: {},
-  // props: {},
-  // data() {
-  //   return {};
-  // },
-  // mounted() {},
-  // beforeDestroy() {},
   methods: {},
 });
 </script>
