@@ -1,24 +1,19 @@
-# test_task5
+# test_task для компании "Информационные системы и сервисы"
 
-## Project setup
+Прошу обратить внимание на качество предоставленных изображений в макете.
+<br>
+Таковые имеют разное разширение а так же разные рамки и белый фон.
+<br>
+Исходя из этого, за корректное и аккуратное отображене не ручаюсь, и прошу не учитывать это за ошибку верстки.
+
+<img src="./screen.jpg" width="100%" />
+
+---
+
+## Для запуска проекта
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
